@@ -69,6 +69,12 @@
  */
 
 /**
+ * @exports ActionRequest
+ * @typedef {import('librechat-data-provider').ActionRequest} ActionRequest
+ * @memberof typedefs
+ */
+
+/**
  * @exports Action
  * @typedef {import('librechat-data-provider').Action} Action
  * @memberof typedefs
