@@ -173,6 +173,7 @@ const loadTools = async ({
 
   const imageGenOptions = {
     fileStrategy: options.fileStrategy,
+    processFileURL: options.processFileURL,
     returnMetadata: options.returnMetadata,
   };
 
