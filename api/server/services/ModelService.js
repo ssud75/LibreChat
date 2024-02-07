@@ -126,7 +126,7 @@ const fetchOpenAIModels = async (opts = { azure: false, plugins: false }, _model
   return models;
 };
 
-const getOpenAIModels = async (opts = { azure: false, plugins: false }) => {
+const getOpenAIModels = async (opts = { azure: false, plugins: false, assistants: false }) => {
   let models = [
     'gpt-4',
     'gpt-4-0613',
@@ -136,12 +136,18 @@ const getOpenAIModels = async (opts = { azure: false, plugins: false }) => {
     'gpt-3.5-turbo-0301',
   ];
 
+  if (opts.assistants) {
+    models = defaultModels[EModelEndpoint.assistant];
+  }
+
   if (!opts.plugins) {
     models.push('text-davinci-003');
   }
 
   let key;
-  if (opts.azure) {
+  if (opts.assistants) {
+    key = 'ASSISTANTS_MODELS';
+  } else if (opts.azure) {
     key = 'AZURE_OPENAI_MODELS';
   } else if (opts.plugins) {
     key = 'PLUGIN_MODELS';
@@ -155,6 +161,10 @@ const getOpenAIModels = async (opts = { azure: false, plugins: false }) => {
   }
 
   if (userProvidedOpenAI && !OPENROUTER_API_KEY) {
+    return models;
+  }
+
+  if (opts.assistants) {
     return models;
   }
 
